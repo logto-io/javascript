@@ -46,6 +46,13 @@ const logtoModule: NuxtModule<LogtoRuntimeConfigInput> = defineNuxtModule<LogtoR
     });
 
     addImportsDir(resolve('./runtime/composables'));
+
+    nuxt.hook('nitro:config', (nitroConfig) => {
+      // eslint-disable-next-line @silverhand/fp/no-mutation
+      nitroConfig.alias ||= {};
+      // eslint-disable-next-line @silverhand/fp/no-mutation
+      nitroConfig.alias['#logto'] = resolve('./runtime/utils/handler.js');
+    });
   },
 });
 
